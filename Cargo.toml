@@ -5,7 +5,7 @@ license = "MIT OR Apache-2.0"
 name = "release-test"
 publish = false
 repository = "https://github.com/mlehmannm/release-test-rs.git"
-version = "0.4.0"
+version = "0.5.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [[bin]]
