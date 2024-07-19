@@ -22,4 +22,5 @@ opt-level = 'z'    # optimize for size
 strip = true
 
 [package.metadata.release]
+pre-release-commit-message = "Release {{crate_name}} version {{version}}"
 tag-message = "Release {{crate_name}} version {{version}}"
