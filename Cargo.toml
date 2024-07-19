@@ -20,3 +20,6 @@ incremental = true
 lto = true
 opt-level = 'z'    # optimize for size
 strip = true
+
+[package.metadata.release]
+tag-message = "Release {{crate_name}} version {{version}}"
