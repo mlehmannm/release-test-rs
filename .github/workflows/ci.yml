@@ -60,11 +60,11 @@ jobs:
         if: ${{ startsWith(matrix.os, 'ubuntu-') }}
         uses: actions/upload-artifact@v4
         with:
-          name: release-test-${{ matrix.toolchain }}
+          name: release-test-linux
           path: ${{ env.ARTIFACT_BASE_PATH }}
       - name: Archive artifacts (Windows)
         if: ${{ startsWith(matrix.os, 'windows-') }}
         uses: actions/upload-artifact@v4
         with:
-          name: release-test-${{ matrix.toolchain }}
+          name: release-test-windows
           path: ${{ env.ARTIFACT_BASE_PATH }}.exe
