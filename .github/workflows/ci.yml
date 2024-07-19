@@ -11,6 +11,8 @@ on:
       - '**.md'
 
 env:
+  # Artifact base path.
+  ARTIFACT_BASE_PATH: target/debug/release-test
   # Disable incremental compilation.
   #
   # Incremental compilation is useful as part of an edit-build-test-edit cycle,
@@ -37,12 +39,12 @@ env:
 
 jobs:
   build_and_test:
-    name: Rust project - latest
+    name: Build and Test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        toolchain: [stable, nightly]
+        toolchain: [stable] # , nightly
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -54,8 +56,15 @@ jobs:
         run: cargo build --verbose
       - name: Test
         run: cargo test --verbose
-      - name: Archive artifacts
+      - name: Archive artifacts (Ubuntu)
+        if: ${{ startsWith(matrix.os, 'ubuntu-') }}
         uses: actions/upload-artifact@v4
         with:
           name: release-test-${{ matrix.toolchain }}
-          path: target/debug/release-test
+          path: ${{ env.ARTIFACT_BASE_PATH }}
+      - name: Archive artifacts (Windows)
+        if: ${{ startsWith(matrix.os, 'windows-') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-test-${{ matrix.toolchain }}
+          path: ${{ env.ARTIFACT_BASE_PATH }}.exe

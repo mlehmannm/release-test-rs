@@ -10,19 +10,16 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        toolchain: [stable]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Build changelog
-        id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@main
-        with:
-          configuration: 'release-changelog-builder-config.json'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create release
         id: create_release
         uses: actions/create-release@latest
@@ -31,6 +28,5 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: ${{ steps.build_changelog.outputs.changelog }}
           draft: false
           prerelease: false
