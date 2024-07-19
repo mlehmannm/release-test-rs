@@ -38,7 +38,7 @@ env:
   RUSTFLAGS: ""
 
 jobs:
-  build_and_test:
+  build-and-test:
     name: Build and Test
     runs-on: ${{ matrix.os }}
     strategy:

@@ -13,3 +13,10 @@ name = "release-test"
 path = "src/main.rs"
 
 [dependencies]
+
+[profile.release]
+codegen-units = 1
+incremental = true
+lto = true
+opt-level = 'z'    # optimize for size
+strip = true
