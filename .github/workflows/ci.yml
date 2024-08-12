@@ -25,6 +25,8 @@ env:
   # See https://matklad.github.io/2021/09/04/fast-rust-builds.html#ci-workflow
   # for details.
   CARGO_INCREMENTAL: 0
+  # Cargo should always colorise output.
+  CARGO_TERM_COLOR: always
   # Allow more retries for network requests in cargo (downloading crates) and
   # rustup (installing toolchains). This should help to reduce flaky CI failures
   # from transient network timeouts or other issues.
@@ -32,9 +34,7 @@ env:
   RUSTUP_MAX_RETRIES: 10
   # Don't emit giant backtraces in the CI logs.
   RUST_BACKTRACE: short
-  # why?
-  CARGO_TERM_COLOR: always
-  # why?
+  # Reset to disable failure on clippy warnings.
   RUSTFLAGS: ""
 
 jobs:
